@@ -1,4 +1,5 @@
 
+import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.StatefulBeanToCsv;
 import com.opencsv.bean.StatefulBeanToCsvBuilder;
@@ -14,6 +15,7 @@ public class AddressBookFileIO {
 
     static  String FILE_NAME = "C:\\Users\\BABA\\AddressBook_CSV_JSON\\src\\main\\resources\\AddressBook_Data.txt";
     public static String CSV_FILE_NAME = "C:\\Users\\BABA\\AddressBook_CSV_JSON\\src\\main\\resources\\AddressBook_CSV.csv";
+    public static String JSON_FILE_NAME = "C:\\Users\\BABA\\AddressBook_CSV_JSON\\src\\main\\resources\\AddressBook_JSON.json";
     //DATA TEXT
     public void writeDataToFile(List<PersonDetails> personDetails) {
         StringBuffer buffer = new StringBuffer();
@@ -75,6 +77,40 @@ public class AddressBookFileIO {
         long count = 0;
         try {
             count = Files.lines(new File(CSV_FILE_NAME).toPath())
+                    .count();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Count is:" +count);
+        return count;
+    }
+    //JSON
+    public void writeDataToJSONFile(List<PersonDetails> personDetails) {
+        try {
+            Gson gson = new Gson();
+            String json = gson.toJson(personDetails);
+            FileWriter writer = new FileWriter(JSON_FILE_NAME);
+            writer.write(json);
+            gson.toJson(personDetails,writer);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void readJsonData() {
+        try {
+            Files.lines(new File(JSON_FILE_NAME).toPath())
+                    .forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public long JsonlistCount() {
+        long count = 0;
+        try {
+            count = Files.lines(new File(JSON_FILE_NAME).toPath())
                     .count();
         } catch (IOException e) {
             e.printStackTrace();
