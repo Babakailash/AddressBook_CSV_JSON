@@ -1,0 +1,3 @@
+PersonDetails{name='Kailash', address='Ayodhya', city='Ayodhya', state='UP', zip='42001', phoneNo='9794445197', email='baba@111'}
+PersonDetails{name='Moun10', address='Meme', city='New Ashok', state='New Delhi', zip='42585', phoneNo='993658568', email='rip@567'}
+PersonDetails{name='King', address='World', city='Nagar', state='New Delhi', zip='110096', phoneNo='9205267464', email='gip@789'}
